@@ -2,6 +2,10 @@
 
 `git freeze` will submodule all git-package Go imports from `./...` into `vendor/`.
 
+# Status
+
+[![Build Status](https://travis-ci.org/nicerobot/git-freeze.png?branch=master)](https://travis-ci.org/nicerobot/git-freeze)
+
 ## Install
 
     go get github.com/nicerobot/git-freeze

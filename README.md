@@ -12,4 +12,4 @@
 
 ## Note
 
-Since `git freeze` will traverse `./...`, running `git freeze` multiple times will freeze transitive dependencies. This may not be what you want. Ideally, all transitive dependencies will be vendored/frozen, providing build consistency.
+`git freeze -transitive` will traverse `./...`, so running it multiple times will continually freeze transitive dependencies. But, ideally, you do not want to use `-transitive` since transitive dependencies should be vendored/frozen by the package maintainer.

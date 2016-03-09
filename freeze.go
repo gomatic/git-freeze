@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"io"
 	"os"
@@ -16,6 +17,12 @@ import (
 //
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
+
+	transitive := func() bool {
+		transitive := flag.Bool("transitive", false, "Traverse transitive imports, i.e. vendor/")
+		flag.Parse()
+		return *transitive
+	}()
 
 	self := "."
 	{
@@ -47,7 +54,7 @@ func main() {
 		_go = go_
 	}
 
-	imports := exec.Command(_go, `list`, `-f`, `{{range $imp := .Imports}}{{printf "%s\n" $imp}}{{end}}`, `./...`)
+	imports := exec.Command(_go, `list`, `-f`, `{{$p := .ImportPath}}{{range $imp := .Imports}}{{printf "%s\t%s\n" $p $imp}}{{end}}`, `./...`)
 
 	r, w := io.Pipe()
 	imports.Stdout = w
@@ -64,8 +71,13 @@ func main() {
 		repos := map[string]int{}
 		for err == nil {
 			if line, err = reader.ReadString('\n'); err == nil {
-				parts := strings.Split(strings.TrimSpace(string(line)), "/")
+				pi := strings.Split(strings.TrimSpace(string(line)), "\t")
+				p, i := pi[0], pi[1]
+				parts := strings.Split(i, "/")
 				if len(parts) >= 3 && parts[2] != self {
+					if !transitive && strings.Contains(p, "/vendor") {
+						continue
+					}
 					repo := strings.Join(parts[:3], "/")
 					repos[repo] += 1
 				}

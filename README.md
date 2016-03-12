@@ -8,27 +8,29 @@
 
 ## Install
 
-    go get github.com/nicerobot/git-freeze
+		go get github.com/nicerobot/git-freeze
 
 ## Usage
 
-    git freeze
+		git freeze
+
+## Help
 
 		Usage:
-  		-branch string
-        		Git branch/commit to submodule/subtree. (defaults to the parent's branch)
-  		-dry-run
-        		Just print the command but do not run it.
-  		-force
-        		Force.
-  		-list
-        		Only list the imports that can be frozen.
-  		-subtree
-        		Use a subtree instead of a submodule.
-  		-transitive
-        		Traverse transitive imports, i.e. vendor/
-  		-verbose
-        		More output.
+			-branch string
+						Git branch/commit to submodule/subtree. (defaults to the parent's branch)
+			-dry-run
+						Just print the command but do not run it.
+			-force
+						Force.
+			-list
+						Only list the imports that can be frozen.
+			-subtree
+						Use a subtree instead of a submodule.
+			-transitive
+						Traverse transitive imports, i.e. vendor/
+			-verbose
+						More output.
 
 ## Note
 

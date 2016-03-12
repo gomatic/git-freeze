@@ -30,11 +30,6 @@ func main() {
 		}
 	}
 
-	if _, err := os.Stat(".git"); err != nil {
-		fmt.Fprintf(os.Stderr, ".git does not exist\n")
-		os.Exit(1)
-	}
-
 	_git, _go := "", ""
 	if git_, err := exec.LookPath("git"); err != nil {
 		fmt.Fprintf(os.Stderr, "%s\n", err)
@@ -54,7 +49,7 @@ func main() {
 	{
 		cmd := exec.Command(_git, "rev-parse", "--abbrev-ref", "HEAD")
 		if output, err := cmd.CombinedOutput(); err != nil {
-			fmt.Fprintf(os.Stderr, "ERROR: %v\noutput:\n%s", cmd.Args, output)
+			fmt.Fprintf(os.Stderr, "Failed to obtain current git branch:\n%s\n%s", strings.Join(cmd.Args, " "), output)
 		} else {
 			branch = strings.TrimSpace(string(output))
 		}

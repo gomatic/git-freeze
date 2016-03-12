@@ -1,6 +1,6 @@
 # Easy Go vendoring
 
-`git freeze` will submodule all git-package Go imports from `./...` into `vendor/`.
+`git freeze` will submodule or subtree all git-package Go imports from `./...` into `vendor/`.
 
 # Status
 
@@ -13,6 +13,22 @@
 ## Usage
 
     git freeze
+
+		Usage:
+  		-branch string
+        		Git branch/commit to submodule/subtree. (defaults to the parent's branch)
+  		-dry-run
+        		Just print the command but do not run it.
+  		-force
+        		Force.
+  		-list
+        		Only list the imports that can be frozen.
+  		-subtree
+        		Use a subtree instead of a submodule.
+  		-transitive
+        		Traverse transitive imports, i.e. vendor/
+  		-verbose
+        		More output.
 
 ## Note
 

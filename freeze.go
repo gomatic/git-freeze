@@ -95,6 +95,9 @@ func main() {
 				p, i := pi[0], pi[1]
 				parts := strings.Split(i, "/")
 				if len(parts) >= 3 && parts[2] != self {
+					if parts[0] == "golang.org" {
+						continue
+					}
 					if !transitive && strings.Contains(p, "/vendor") {
 						continue
 					}

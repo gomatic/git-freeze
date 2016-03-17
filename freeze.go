@@ -98,6 +98,9 @@ func main() {
 					if parts[0] == "golang.org" {
 						continue
 					}
+					if !strings.Contains(parts[0], ".") {
+						continue
+					}
 					if !transitive && strings.Contains(p, "/vendor") {
 						continue
 					}

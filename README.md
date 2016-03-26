@@ -12,6 +12,8 @@
 
 ## Usage
 
+If your `GOBIN` is also in your `PATH`, `git-freeze` will be accessible as:
+
 		git freeze
 
 ## Help

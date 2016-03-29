@@ -55,11 +55,12 @@ func main() {
 		}
 	}
 
-	force, verbose, transitive, subtree, list, dryrun := false, false, false, false, false, false
+	force, verbose, transitive, subtree, list, dryrun, notests := false, false, false, false, false, false, false
 	flag.BoolVar(&transitive, "transitive", transitive, "Traverse transitive imports, i.e. vendor/")
 	flag.BoolVar(&subtree, "subtree", subtree, "Use a subtree instead of a submodule.")
 	flag.BoolVar(&dryrun, "dry-run", dryrun, "Just print the command but do not run it.")
 	flag.BoolVar(&list, "list", list, "Only list the imports that can be frozen.")
+	flag.BoolVar(&notests, "notests", notests, "Do not freeze test-imports.")
 	flag.BoolVar(&verbose, "verbose", verbose, "More output.")
 	flag.BoolVar(&force, "force", force, "Force.")
 	flag.StringVar(&branch, "branch", branch, "Git branch/commit to submodule/subtree.")
@@ -74,7 +75,11 @@ func main() {
 		patterns[i] = regexp.MustCompile(a)
 	}
 
-	imports := exec.Command(_go, "list", "-f", `{{$p := .ImportPath}}{{range $imp := .Imports}}{{printf "%s\t%s\n" $p $imp}}{{end}}`, "./...")
+	format := `{{$p := .ImportPath}}{{range $imp := .Imports}}{{printf "%s\t%s\n" $p $imp}}{{end}}`
+	if !notests {
+		format += `{{range $imp := .TestImports}}{{printf "%s\t%s\n" $p $imp}}{{end}}`
+	}
+	imports := exec.Command(_go, "list", "-f", format, "./...")
 
 	r, w := io.Pipe()
 	imports.Stdout = w

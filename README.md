@@ -27,6 +27,8 @@ If your `GOBIN` is also in your `PATH`, `git-freeze` will be accessible as:
 						Force.
 			-list
 						Only list the imports that can be frozen.
+			-notests
+						Do not freeze test-imports.
 			-subtree
 						Use a subtree instead of a submodule.
 			-transitive

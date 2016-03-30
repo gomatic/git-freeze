@@ -3,7 +3,6 @@ package main
 import (
 	"testing"
 
-	_ "github.com/Spatially/go-environ"
 	_ "github.com/Spatially/go-flagged"
 	_ "github.com/go-kit/kit/log"
 	_ "github.com/go-kit/kit/transport/http"

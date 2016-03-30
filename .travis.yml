@@ -9,5 +9,7 @@ notificaitons:
       robert@nicerobot.org
     on_success: change
     on_failure: always
+install:
+  - go get -t ./...
 script:
   - go test -v

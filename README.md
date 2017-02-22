@@ -4,11 +4,11 @@
 
 # Status
 
-[![Build Status](https://travis-ci.org/nicerobot/git-freeze.png?branch=master)](https://travis-ci.org/nicerobot/git-freeze)
+[![Build Status](https://travis-ci.org/gomatic/git-freeze.png?branch=master)](https://travis-ci.org/gomatic/git-freeze)
 
 ## Install
 
-		go get github.com/nicerobot/git-freeze
+		go get github.com/gomatic/git-freeze
 
 ## Usage
 
